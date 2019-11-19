@@ -6,7 +6,10 @@
 void (*test3)() = 0;
 void test()
 {
-	bkpt();
+	if (test3 != 0)
+	{
+		test3();
+	}
 }
 
 
@@ -15,12 +18,9 @@ void test()
 
 int main(int argsn, char *argc)
 {
-	//bkpt();
 	initRecursiveDynlinker();
-	//bkpt();
-	registerLibrary_r("testlib2",test);
-	//test3 = requestLibrary_r("testlib3");
-	//bkpt();
+	registerLibrary_r("testlib2.lib",test);
+	test3 = requestLibrary_r("testlib3.lib");
 	nl_set_resident();
 	
 	return 0;

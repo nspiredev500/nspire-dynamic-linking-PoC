@@ -6,8 +6,9 @@
 
 void test()
 {
-	
+	bkpt();
 }
+
 
 
 
@@ -15,8 +16,7 @@ void test()
 int main(int argsn, char *argc)
 {
 	initRecursiveDynlinker();
-	registerLibrary_r("testlib3",test);
-	bkpt();
+	registerLibrary_r("testlib3.lib",test);
 	nl_set_resident();
 	
 	return 0;

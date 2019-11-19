@@ -9,11 +9,9 @@
 int main(int argsn, char *argc)
 {
 	initRecursiveDynlinker();
-	void (*test)() = requestLibrary_r("testlib");
+	void (*test)() = requestLibrary_r("testlib.lib");
 	if (test != 0)
 		test();
-	requestLibrary_r("testlib2");
-	requestLibrary_r("testlib3");
 	
 	return 0;
 }
