@@ -5,7 +5,7 @@
 #include <strings.h>
 #include <os.h>
 #include <nspireio2.h>
-
+#include <libndls.h>
 
 
 typedef struct Library Library;
@@ -15,7 +15,7 @@ struct Library
 	void *functiontable;
 	Library *next;
 };
-struct Library *libs;
+struct Library *libs = NULL;
 typedef struct
 {
 	char *name;
@@ -38,8 +38,34 @@ void extendSWIHandler();
 
 
 
-int main()
+int main(int argsn, char ** argv)
 {
+	uart_printf("argsn: %d\n",argsn);
+	
+	for (int i = 0;i<argsn;i++)
+	{
+		uart_printf("argv[%d]: %s\n",i,argv[i]);
+	}
+	
+	
+	
+	// values aren't shared because osext is run again, communication has to be done through syscalls
+	if (argsn > 1 && argv[1] != NULL) 
+	{
+		return fileExtensionTriggered(argv[1]);
+	}
+	
+	
+	//needs ndless.cfg.tns to work
+	//creating it doesn't seem to work
+	//an empty config file has to be transferred to the calc once it seems
+	
+	
+	cfg_register_fileext("libp","osext");
+	cfg_register_fileext("lib","osext");
+	
+	
+	
 	extendSWIHandler();
 	
 	initDynlinker();

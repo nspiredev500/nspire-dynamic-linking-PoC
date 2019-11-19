@@ -3,24 +3,24 @@
 
 #include "include/osext.h"
 
-void (*test2)() = 0;
-
+void (*test3)() = 0;
 void test()
 {
-	//if (test2 != 0)
-		//test2();
+	bkpt();
 }
+
+
+
 
 
 int main(int argsn, char *argc)
 {
+	//bkpt();
 	initRecursiveDynlinker();
-	registerLibrary_r("testlib",test);
 	//bkpt();
-	//test2 = requestLibrary_r("testlib2");
+	registerLibrary_r("testlib2",test);
+	//test3 = requestLibrary_r("testlib3");
 	//bkpt();
-	
-	
 	nl_set_resident();
 	
 	return 0;

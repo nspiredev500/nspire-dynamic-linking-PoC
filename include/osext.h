@@ -29,7 +29,20 @@ void* requestLibrary(char *name)
 		: "memory", "r1", "r2", "r3", "r4", "r12", "lr");
 	return (void*) r0;
 }
-
+bool (*registerLibrary_r)(char *,void*);
+void* (*requestLibrary_r)(char*);
+void initRecursiveDynlinker()
+{
+	register unsigned int* r0 asm("r0");
+	unsigned int nr = OSEXT_SYSCALL_MASK | (5*20+10+2);
+	asm volatile(
+		"swi %[nr]\n"
+		: "=r" (r0)
+		: [nr] "i" (nr)
+		: "memory", "r1", "r2", "r3", "r4", "r12", "lr");
+	registerLibrary_r = (bool (*)(char *, void *)) *(r0);
+	requestLibrary_r = (void * (*)(char *)) *(r0+1);
+}
 
 
 bool osext_installed()

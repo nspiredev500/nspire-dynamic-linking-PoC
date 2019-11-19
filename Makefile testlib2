@@ -8,7 +8,7 @@ GENZEHN = genzehn
 
 GCCFLAGS = -Wall -W -marm
 LDFLAGS =
-ZEHNFLAGS = --name "libuser" --240x320-support true
+ZEHNFLAGS = --name "testlib2" --240x320-support true
 
 ifeq ($(DEBUG),FALSE)
 	GCCFLAGS += -Os
@@ -16,8 +16,8 @@ else
 	GCCFLAGS += -O0 -g
 endif
 
-OBJS = libuser.o
-EXE = libuser.libp
+OBJS = testlib2.o
+EXE = testlib2.lib
 DISTDIR = .
 vpath %.tns $(DISTDIR)
 vpath %.elf $(DISTDIR)
@@ -39,7 +39,7 @@ $(EXE).elf: $(OBJS)
 
 $(EXE).tns: $(EXE).elf
 	$(GENZEHN) --input $^ --output $@ $(ZEHNFLAGS)
-	./needslibs $@ testlib.lib
+	./needslibs $@ testlib3.lib
 
 clean:
 	rm -f $(OBJS) $(DISTDIR)/$(EXE).tns $(DISTDIR)/$(EXE).elf $(DISTDIR)/$(EXE).zehn

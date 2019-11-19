@@ -1,7 +1,13 @@
 
 #include <os.h>
+
 #include "include/osext.h"
 
+
+void test()
+{
+	
+}
 
 
 
@@ -9,11 +15,9 @@
 int main(int argsn, char *argc)
 {
 	initRecursiveDynlinker();
-	void (*test)() = requestLibrary_r("testlib");
-	if (test != 0)
-		test();
-	requestLibrary_r("testlib2");
-	requestLibrary_r("testlib3");
+	registerLibrary_r("testlib3",test);
+	bkpt();
+	nl_set_resident();
 	
 	return 0;
 }

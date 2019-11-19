@@ -16,7 +16,7 @@ else
 	GCCFLAGS += -O0 -g
 endif
 
-OBJS = osext.o
+OBJS = osext.o zehn_loader.o
 HEADERS = $(patsubst %.c, %.o, $(shell find . -depth -name \*.h))
 EXE = osext
 DISTDIR = .

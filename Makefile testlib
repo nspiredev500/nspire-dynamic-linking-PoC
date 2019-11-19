@@ -17,7 +17,7 @@ else
 endif
 
 OBJS = testlib.o
-EXE = testlib
+EXE = testlib.lib
 DISTDIR = .
 vpath %.tns $(DISTDIR)
 vpath %.elf $(DISTDIR)
@@ -38,9 +38,8 @@ $(EXE).elf: $(OBJS)
 	$(LD) $^ -o $@ $(LDFLAGS)
 
 $(EXE).tns: $(EXE).elf
-	$(GENZEHN) --input $^ --output $@.zehn $(ZEHNFLAGS)
-	make-prg $@.zehn $@
-	rm $@.zehn
+	$(GENZEHN) --input $^ --output $@ $(ZEHNFLAGS)
+	./needslibs $@ testlib2.lib
 
 clean:
 	rm -f $(OBJS) $(DISTDIR)/$(EXE).tns $(DISTDIR)/$(EXE).elf $(DISTDIR)/$(EXE).zehn

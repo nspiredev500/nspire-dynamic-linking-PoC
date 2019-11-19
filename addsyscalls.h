@@ -99,6 +99,7 @@ asm("OSExt_sign: .long 0\n" // r0 = syscall number, r2 = spsr
 " ldr r1, syscall_table\n"
 " ldr r0, [r1, r0, lsl #2]\n" // get syscall address
 " str r0, [sp, #12]\n"
+//" bkpt\n"
 " mov lr, pc\n" // save return address
 " ldmfd sp!, {r0-r2, pc}\n" // jump to syscall
 " back_from_syscall: \n"
